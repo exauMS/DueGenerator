@@ -1,0 +1,287 @@
+﻿@using DueWebApp.Interfaces;
+@model AdminAccess
+@{
+    ViewData["Title"] = "Admin Page";
+}
+
+<h1 class="display-4">Espace admin</h1>
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Ajouter un utilisateur
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+                @using (Html.BeginForm("AddUser", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Username</label>
+                    <input  type="text" class="form-control" name="UserName" placeholder="Nom">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput2">E-mail</label>
+                    <input type = "email" class="form-control"  name="Email" placeholder="E-mail">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput2">Mot de passe</label>
+                    <input type="text" class="form-control"  name="Password" placeholder="Mot de passe">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Role</label>
+                    <select class="form-control" name="Role">
+                        <option>admin</option>
+                        <option>user</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Ajouter" />
+                </div>
+                }
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Supprimer un utilisateur
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+                @using (Html.BeginForm("DeleteUser", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect4">Utilisateurs</label>
+                        <select class="form-control" name="UserDelete">
+                            
+                                @foreach (var user in Model.Users)
+                                {
+                                    <option>@user.UserName</option>           
+                                }
+                                
+                            
+                    </select>
+                </div>
+
+
+                <div>
+                    <input type="submit" value="Supprimer" />
+                </div>
+                }
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Departement
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+                @using (Html.BeginForm("CreateDepartement", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nom</label>
+                    <input type="text" class="form-control" name="departementNom" placeholder="Nom Departement">
+                </div>
+
+                <div>
+                    <input type="submit" value="Creer" />
+                </div>
+                }
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingFour">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          Cursus
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+                @using (Html.BeginForm("CreateCursus", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nom</label>
+                    <input type="text" class="form-control" name="Nom" placeholder="Nom Cursus">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Implantation</label>
+                    <input type="text" class="form-control"  name="Implantation" placeholder="Implantation (Adresse)">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Telephone</label>
+                    <input type="text" class="form-control" name="Tel" placeholder="Numero Telephone">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Departement </label>
+                    <select class="form-control"  name="Departement">
+                                    @foreach (var d in Model.Departements)
+                                    {
+                                    <option>@d.Nom</option>
+                                    }
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Creer" />
+                </div>
+                }
+      </div>
+    </div>
+  </div>
+   <div class="card">
+    <div class="card-header" id="headingFive">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          UE
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+      <div class="card-body">
+                @using (Html.BeginForm("CreateUE", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nom</label>
+                    <input type="text" class="form-control" name="Nom" placeholder="Nom UE">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Code</label>
+                    <input type="text" class="form-control"  name="Code" placeholder="Code UE">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Cursus </label>
+                    <select class="form-control"  name="Cursus">
+                                    @foreach (var cursus in Model.Cursus)
+                                    {
+                                    <option>@cursus.Name</option>
+                                    }
+                    </select>
+                </div>
+                <div>
+                <input type="submit" value="Creer UE" />
+                </div>
+
+                }
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingSix">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          AA
+        </button>
+      </h5>
+    </div>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+      <div class="card-body">
+                @using (Html.BeginForm("CreateAA", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nom</label>
+                    <input type="text" class="form-control" name="Nom" placeholder="Nom AA">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Professeur</label>
+                    <select class="form-control" name="Professeur">
+                                    @foreach (var prof in Model.Users)
+                                    {
+                                    <option>@prof.UserName</option>
+                                    }
+                    </select>
+                </div>
+                <div>
+                <input type="submit" value="Creer" />
+                </div>
+
+                }
+      </div>
+    </div>
+  </div>
+   <div class="card">
+    <div class="card-header" id="headingSeven">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+          Competence
+        </button>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+      <div class="card-body">
+                @using (Html.BeginForm("CreateCompetence", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Competence</label>
+                    <input type="text" class="form-control" name="Nom" placeholder="Competence">
+                </div>
+
+                <div>
+                    <input type="submit" value="Creer Competence" />
+                </div>
+                }
+      </div>
+    </div>
+  </div>
+   <div class="card">
+    <div class="card-header" id="headingEight">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+          Capacite
+        </button>
+      </h5>
+    </div>
+    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+      <div class="card-body">
+                @using (Html.BeginForm("CreateCapacite", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Description</label>
+                    <input type="text" class="form-control" name="Capacite" placeholder="Description">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Competence</label>
+                    <select class="form-control" name="Competence">
+                                    @foreach (var comp in Model.Competences)
+                                    {
+                                    <option>@comp.Nom</option>
+                                    }
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Creer Capacite" />
+                </div>
+                }
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,204 @@
+﻿@model AdminAccess
+
+
+<h4>Creer une fiche</h4>
+@using (Html.BeginForm("FicheTraitement", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label>Annee (ex: 22-23)</label>
+        <input type="text" class="form-control" placeholder="Annee academique" name="Annee">
+    </div>
+
+    <div class="form-group">
+            <label>UE</label>
+            <select  class="form-control"  name="UE">
+            @foreach (var ue in Model.UE)
+            {
+              <option>@ue.Nom</option>
+            }
+            </select>
+    </div>
+
+
+    <div class="form-group">
+        <label>Departement</label>
+        <select  class="form-control"  name="Departement">
+        @foreach (var dep in Model.Departements)
+        {
+              <option>@dep.Nom</option>
+        }
+        </select>
+    </div>
+
+        <div class="form-group">
+            <label>Cursus</label>
+            <select  class="form-control"  name="Cursus">
+            @foreach (var cur in Model.Cursus)
+            {
+                    <option>@cur.Name</option>
+            }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Orientation</label>
+            <input type="text" class="form-control" placeholder="Orientation" name="Orientation">
+        </div>
+
+            <div class="form-group">
+            <label>Cycle</label>
+            <select class="form-control" name="Cycle">
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Bloc d'etudes</label>
+            <select class="form-control" name="Bloc">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Quadrimestre</label>
+            <select class="form-control" name="Quadri">
+                <option>Q1</option>
+                <option>Q2</option>
+                <option>Q3</option>
+                <option>Q4</option>
+                <option>Q5</option>
+                <option>Q6</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Niveau de certification</label>
+            <select multiple class="form-control" name="Certification">
+                <option>niveau 5</option>
+                <option>niveau 6</option>
+                <option>niveau 7</option>
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>UE Prerequis</label>
+            <select multiple class="form-control" name="Prerequis">
+            @foreach (var ue in Model.UE)
+            {
+                            <option>@ue.Nom</option>
+            }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>UE Corequis</label>
+            <select multiple class="form-control" name="Corequis">
+            @foreach (var ue in Model.UE)
+            {
+                         <option>@ue.Nom</option>
+            }
+            </select>
+        </div>
+
+    <div class="form-group">
+        <label>Volume Horaire</label>
+        <input type="text" class="form-control" name="Heures" placeholder="Heures">
+    </div>
+    <div class="form-group">
+        <label>Credits Ects</label>
+        <input type="text" class="form-control" name="Ects" placeholder="Credits de l'UE">
+    </div>
+
+
+    <div class="form-group">
+        <label>Langues d'enseignement</label>
+        <select class="form-control" name="LangueEn">
+            <option>Francais</option>
+            <option>Neerlandais</option>
+            <option>Anglais</option>
+            <option>Espagnol</option>
+        </select>
+    </div>
+    
+
+    <div class="form-group">
+        <label>Langues d'évaluation</label>
+        <select class="form-control" name="LangueEv">
+            <option>Francais</option>
+            <option>Neerlandais</option>
+            <option>Anglais</option>
+            <option>Espagnol</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Responsable de l'UE</label>
+        <select class="form-control" name="ResponsableUE">
+        @foreach (var user in Model.Users)
+        {
+                    <option>@user.UserName</option>
+        }
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label>AA</label>
+        <select multiple class="form-control" name="AA">
+        @foreach (var aa in Model.AA)
+        {
+                    <option>@aa.Professeur (@aa.Nom)</option>
+        }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Compétences</label>
+        <select multiple class="form-control" name="Competence">
+        @foreach (var competence in Model.Competences)
+        {
+                    <option>@competence.Nom</option>
+        }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Acquis d'apprentissage</label>
+        <textarea class="form-control" rows="4" name="Acquis"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Contenu synthétiques</label>
+        <textarea class="form-control" rows="4" name="ContenuSynth"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Méthodes d'apprentissage</label>
+        <textarea class="form-control" rows="4" name="MethodeApp"></textarea>
+    </div>
+
+    <div>
+        <label>Support de cours (e-campus,Obligatoire[oui/non],En ligne[oui/non]</label>
+            <textarea class="form-control"  rows="4" name="SupportCours"></textarea>
+
+    </div>
+    <div class="form-group">
+        <label>Type d'évaluation</label>
+        <textarea class="form-control" rows="4" name="TypeEval"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Calcul de la note</label>
+        <textarea class="form-control" rows="4" name="CalculNote"></textarea>
+    </div>
+    <div> 
+        <input type="submit" value="Soumettre" />
+    </div>
+
+
+}

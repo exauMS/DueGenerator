@@ -1,0 +1,54 @@
+﻿@model AdminAccess
+
+<h4>Selectionnez une fiche</h4>
+
+@using (Html.BeginForm("FilterFiche", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+    <div class="form-group">
+            <label>Filtre par annee</label>
+            <select  class="form-control"  name="Filtre">
+             <option>Aucun</option>
+            @foreach (var fiche in Model.Fiches)
+            {
+              <option>@fiche.Annee</option>
+            }
+            </select>
+            <input type="submit" value="Filtrer" />
+
+    </div>
+}
+
+@using (Html.BeginForm("GenerateFiche", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+        <div class="form-group">
+                <label>Fiches</label>
+                <select  class="form-control"  name="Fiche">
+                @foreach (var fiche in Model.FilterFiches)
+                {
+                        <option>@fiche.Titre</option>
+                }
+                </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="word">Ajouter un template personnalisé (facultatif)</label>
+            <input type="file" name="userFile" accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+
+        </div>
+
+
+        <div class="form-group">
+            
+            <input type="radio" value="Word" name="Format" id="word" checked>
+                <label for="word">Word</label>
+            <input type="radio" value="Pdf" name="Format" id="pdf">
+                <label for="pdf">Pdf</label>
+        </div>
+
+        <div> 
+            <input type="submit" value="Generer" />
+        </div>
+}
